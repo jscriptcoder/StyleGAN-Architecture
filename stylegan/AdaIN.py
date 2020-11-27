@@ -1,3 +1,6 @@
+import torch.nn as nn
+
+
 class AdaIN(nn.Module):
     '''
     AdaIN Class

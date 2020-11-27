@@ -1,3 +1,6 @@
+from scipy.stats import truncnorm
+
+
 def get_truncated_noise(n_samples, z_dim, truncation):
     '''
     Function for creating truncated noise vectors: Given the dimensions (n_samples, z_dim)
