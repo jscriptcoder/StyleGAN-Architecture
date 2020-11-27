@@ -1,6 +1,7 @@
 import torch.nn as nn
 import torch.nn.functional as F
 
+
 class EqualizedLinear(nn.Module):
     def __init__(self,
                  in_channels,
@@ -13,6 +14,7 @@ class EqualizedLinear(nn.Module):
         super(, self).__init__()
 
         he_std = gain * in_channels ** (-0.5)  # He init
+
         if use_wscale:
             init_std = 1.0 / lrmul
             self.w_lrmul = he_std * lrmul
@@ -30,8 +32,6 @@ class EqualizedLinear(nn.Module):
 
     def forward(self, x):
         if self.bias is not None:
-            out = F.linear(x, self.weight * self.w_lrmul, self.bias * self.b_lrmul)
+            return F.linear(x, self.weight * self.w_lrmul, self.bias * self.b_lrmul)
         else:
-            out = F.linear(x, self.weight * self.w_lrmul)
-
-        return out
+            return F.linear(x, self.weight * self.w_lrmul)
