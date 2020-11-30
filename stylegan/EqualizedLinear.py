@@ -6,7 +6,7 @@ class EqualizedLinear(nn.Module):
     def __init__(self,
                  in_channels,
                  out_channels,
-                 gain=2,
+                 gain=2**0.5,
                  use_wscale=True,
                  lrmul=1.0,
                  bias=True):

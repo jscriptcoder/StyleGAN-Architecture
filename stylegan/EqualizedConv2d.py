@@ -7,7 +7,7 @@ class EqualizedConv2d(nn.Module):
                  input_channels,
                  output_channels,
                  kernel_size,
-                 gain=2,
+                 gain=2**0.5,
                  use_wscale=True,
                  lrmul=1,
                  bias=True):

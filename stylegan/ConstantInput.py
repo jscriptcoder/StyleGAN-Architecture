@@ -5,7 +5,7 @@ class ConstantInput(nn.Module):
     def __init__(self, in_chan, size=4):
         super().__init__()
 
-        self.input = nn.Parameter(torch.randn(1, in_chan, size, size)) # (batch, channels, height, width)
+        self.input = nn.Parameter(torch.randn(1, in_chan, size, size))
 
     def forward(self, x):
         batch = x.shape[0]

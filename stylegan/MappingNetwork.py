@@ -11,20 +11,13 @@ class MappingNetwork(nn.Module):
         
         super().__init__()
 
-        layers = [
-            EqualizedLinear(z_dim, hidden_dim),
-            nn.LeakyReLU(0.2),
-        ]
-
-        for i in n_layers - 2:
-            layers.append(EqualizedLinear(hidden_dim, hidden_dim))
+        layers = []
+        for i in n_layers:
+            fmaps_in = z_dim if i == 0 else hidden_dim
+            fmaps_out = w_dim if i == n_layers - 1 else hidden_dim
+            layers.append(EqualizedLinear(fmaps_in, fmaps_out))
             layers.append(nn.LeakyReLU(0.2))
         
-        layers.append(EqualizedLinear(z_dim, w_dim))
-
-        # NN that takes in tensors of 
-        # shape (n_samples, z_dim) and outputs (n_samples, w_dim)
-        # with a hidden layer with hidden_dim neurons
         self.mapping = nn.Sequential(*layers)
 
     def forward(self, noise):
