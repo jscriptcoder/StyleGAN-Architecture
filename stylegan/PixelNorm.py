@@ -7,4 +7,4 @@ class PixelNorm(Module):
         self.epsilon = epsilon
     
     def forward(self, x):
-        return x / torch.sqrt(torch.mean(x**2, dim=1, keepdim=True) + self.epsilon)
+        return x * torch.rsqrt(torch.mean(x**2, dim=1, keepdim=True) + self.epsilon)
